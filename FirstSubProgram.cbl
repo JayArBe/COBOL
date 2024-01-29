@@ -3,6 +3,7 @@
       * Date: 29/01/2024
       * Purpose: learning
       * Tectonics: cobc
+      * muste be declared as a module. COBOL>Program Type>Module
       ******************************************************************
        IDENTIFICATION DIVISION.
       *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
