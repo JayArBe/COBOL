@@ -19,7 +19,7 @@
       *-----------------------
       * defines source and object computer
        SOURCE-COMPUTER. DESKTOP-9VGD201.
-           OBJECT-COMPUTER. DESKTOP-9VGD201.
+       OBJECT-COMPUTER. DESKTOP-9VGD201.
        INPUT-OUTPUT SECTION.
       *-----------------------
       * printers, files that may be used and assigns identifier names to external features

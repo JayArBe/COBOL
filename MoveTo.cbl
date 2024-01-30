@@ -22,14 +22,23 @@
        01 TEST-IDENTIFIER-1 PIC 99.
        01 TEST-IDENTIFIER-2 PIC S99 SIGN LEADING SEPARATE.
        01 TEST-IDENTIFIER-3 PIC X(12).
+
       *each digit is converted to binary when saving
        01 TEST-BINARY PIC 9(3) VALUE 123 USAGE IS BINARY.
        01 TEST-DEC PIC 9(3) VALUE 123 USAGE IS PACKED-DECIMAL.
+
       *DISPLAY is default. each digit is saved seperately + sign
        01 TEST-DISPLAY PIC 9(4) VALUE 123 USAGE IS DISPLAY.
        01 TEST-FLOAT PIC 9V999 VALUE 1.004.
-       01 TEST-DATE PIC 99/99/99 VALUE 300124.
-       01 TEST-DATE2 PIC 99B99B99 VALUE 300124.
+
+      *when using the line "01 TEST-DATE PIC 99/99/99 VALUE 300124."
+      *it still works and comes out as "30/01/24"
+      *but the compiler will throw a warning
+      *about expecting alphanumeric values
+       01 TEST-DATE PIC 99/99/99 VALUE '30/01/24'.
+      *same here
+       01 TEST-DATE2 PIC 99B99B99 VALUE '30 01 24'.
+      *"01 TEST-DATE PIC 9(8) VALUE '30/01/24'." would work the same.
       *-----------------------
        PROCEDURE DIVISION.
       *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
@@ -82,6 +91,8 @@
            DISPLAY TEST-FLOAT.
 
            DISPLAY TEST-DATE.
+           DISPLAY TEST-DATE2.
+
 
            STOP RUN.
        END PROGRAM MoveTo.
