@@ -37,7 +37,6 @@
               03 IN-NAME-2 PIC X(20).
               03 FILLER PIC X(50).
 
-
            FD MERGE-FILE.
            01 RECORD-OUT PIC X(70).
 
@@ -49,14 +48,22 @@
        PROCEDURE DIVISION.
       *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
        MAIN-PROCEDURE.
-           PERFORM UNTIL EOF-FLAG-1 AND EOF-FLAG-2
+           OPEN INPUT FILE-1.
+           OPEN INPUT FILE-2.
+
+           OPEN OUTPUT MERGE-FILE.
+
+           PERFORM UNTIL EOF-FLAG-1 = 'Y' AND EOF-FLAG-2 ='Y'
       *loop until each file has been read to completion
       *read each file
-             READ FILE-1 INTO RECORD-1
+
+
+
+             READ FILE-1
                AT END SET EOF-FLAG-1 TO 'Y'
                MOVE HIGH-VALUES TO IN-NAME-1
              END-READ
-             READ FILE-2 INTO RECORD-2
+             READ FILE-2
                AT END SET EOF-FLAG-2 TO 'Y'
                MOVE HIGH-VALUES TO IN-NAME-2
              END-READ
@@ -68,6 +75,10 @@
                WRITE RECORD-OUT FROM RECORD-2
              END-IF
            END-PERFORM
+
+           CLOSE FILE-1.
+           CLOSE FILE-2.
+           CLOSE MERGE-FILE.
            STOP RUN.
 
        END PROGRAM YOUR-PROGRAM-NAME.
